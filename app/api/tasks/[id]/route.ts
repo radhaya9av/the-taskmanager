@@ -1,13 +1,13 @@
 import prisma from "@/app/utils/connect";
-import {auth} from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import {getAuth} from "@clerk/nextjs/server";
+import { NextRequest , NextResponse } from "next/server";
 
 export async function DELETE(
-  req: Request,
+  req: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
-    const { userId } = auth();
+    const { userId } = getAuth(req);
     const { id } = params;
 
     if (!userId) {
