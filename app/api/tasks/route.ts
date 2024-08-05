@@ -1,10 +1,11 @@
 import prisma from "@/app/utils/connect";
-import {auth} from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
     const { userId } = auth();
+    console.log("POST userId:", userId); // Debugging log
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized", status: 401 });
@@ -47,6 +48,7 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
   try {
     const { userId } = auth();
+    console.log("GET userId:", userId); // Debugging log
 
     if (!userId) {
       return NextResponse.json({ error: "Unauthorized", status: 401 });
@@ -68,6 +70,7 @@ export async function GET(req: Request) {
 export async function PUT(req: Request) {
   try {
     const { userId } = auth();
+    console.log("PUT userId:", userId); // Debugging log
     const { isCompleted, id } = await req.json();
 
     if (!userId) {
